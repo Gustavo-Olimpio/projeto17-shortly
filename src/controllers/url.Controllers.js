@@ -38,7 +38,7 @@ export async function getUrlid(req, res) {
         const visitCount = links.rows[0].visitCount + 1
         await db.query(`UPDATE links SET "visitCount"='${visitCount}' WHERE "shortUrl"=$1;`, [shortUrl])
         console.log(links.rows[0].url)
-        res.redirect(200,links.rows[0].url)
+        res.redirect(302,links.rows[0].url)
       } catch (err) {
           return res.status(500).send(err.message);
       }
