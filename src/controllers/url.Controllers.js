@@ -11,7 +11,7 @@ export async function postUrl(req, res) {
         if (!auth.rows[0]) return res.status(401).send("Authorization invalido")
         const shortUrl = nanoid.apply(url)
         await db.query(`INSERT INTO links ("userId","url","shortUrl") VALUES (${auth.rows[0].userId},'${url}','${shortUrl}');`)
-        res.status(200).send({id:auth.rows[0].id,shortUrl:shortUrl})
+        res.status(201).send({id:auth.rows[0].id,shortUrl:shortUrl})
     } catch (err) {
         return res.status(500).send(err.message);
     }
